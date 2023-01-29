@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MET Art</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://www.jamesrobertwatson.com/images16/themetlogo2.jpg" alt="MET Logo">
+        </div>
+        <div class="header">
+            <h4 style="display: inline-block; text-align: center;">An art archival resource using the The Metropolitan Museum of Art Collection API.</h4>
+        </div>
+        <section>
+            <div class="welcomeBanner">
+                <span>
+                    <img src="https://i.pinimg.com/564x/b1/09/c5/b109c5f4f9ad50ace467ccbbc76bd09b.jpg" alt="The MET">
+                </span>
+                
+                <h2>Welcome to The MET Archives.</h2>
+                <h3>Explore highlighted pieces from The MET, past & present.</h3>
+            </div>
+        </section>
+        <div class="searchBar">
+            <input type = "text" placeholder="enter a number(0-3000)"  oninput="setArtId(event)">
+            <button onclick="getArt()">Enter</button>
+        </div>
+        <div class="mainDiv">
+          <div class="artIntro"></div>
+          <div class="artDisplay"></div>
+          <div class="artistInfo"></div>
+          <div class="artWorkInfo"></div>
+        </div>
+      </div>
+    </div>
+</body>
+
+<script>
+    let artwork = {};
+    let artId = "";
+
+    function setArtId(){
+        artId = event.target.value
+    }
+
+    async function getArt(){
+            const httpResponse = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects/" + artId);
+
+
+            const body = await httpResponse.json();
+            artwork = body;
+            renderArt();
+        }
+
+    function renderArt(){
+            const name = artwork.title;
+            const artImg = artwork.primaryImageSmall;
+            const artMedium = artwork.medium;
+            const artist = artwork.artistDisplayName;
+            const artistPre = artwork.artistPrefix
+            const artistSuf = artwork.artistSuffix
+            const artistNationality = artwork.artistNationality;
+            const artistLifeDates = artwork.artistDisplayBio;
+            const creation = artwork.period;
+            const artCulture = artwork.culture;
+            const artLearnMore = artwork.artistWikidata_url;
+
+            const artInfoDiv = document.getElementById('artInfo');
+
+            //creating artwork title element
+            const nameHeading = document.createElement('h1');
+            nameHeading.innerText = name;
+            //creating artwork IMG
+            const artImgImg = document.createElement('img');
+            artImgImg.src = artImg;
+            //artist prefix and name
+            const artistHeading = document.createElement('h2');
+            artistHeading.innerText = artistPre + " " + artist + " " + artistSuf;
+            
+            //clear out html in the div
+            artInfoDiv.innerHTML = "";
+
+            // append the elements made
+            artInfoDiv.appendChild(nameHeading);
+            artInfoDiv.appendChild(artImgImg);
+            artInfoDiv.appendChild(artistHeading);
+
+        }
+
+
+</script>
+</html>
