@@ -27,11 +27,11 @@
             <input type = "text" placeholder="enter a number(0-3000)"  oninput="setArtId(event)">
             <button onclick="getArt()">Enter</button>
         </div>
-        <div class="mainDiv">
-          <div class="artIntro"></div>
-          <div class="artDisplay"></div>
-          <div class="artistInfo"></div>
-          <div class="artWorkInfo"></div>
+        <div class="mainDiv" id="mainDiv">
+          <div class="artIntro" id="artIntro"></div>
+          <div class="qLinks"></div>
+          <div class="artDisplay" id="artDisplay"></div>
+            <div class="moreImgs"></div>
         </div>
       </div>
     </div>
@@ -58,16 +58,25 @@
             const name = artwork.title;
             const artImg = artwork.primaryImageSmall;
             const artMedium = artwork.medium;
-            const artist = artwork.artistDisplayName;
+            const creation = artwork.period;
+            const artCulture = artwork.culture;
+            const gallery = artwork.additionalImages;
+
             const artistPre = artwork.artistPrefix
+            const artist = artwork.artistDisplayName;
             const artistSuf = artwork.artistSuffix
             const artistNationality = artwork.artistNationality;
             const artistLifeDates = artwork.artistDisplayBio;
-            const creation = artwork.period;
-            const artCulture = artwork.culture;
-            const artLearnMore = artwork.artistWikidata_url;
+        
+            const artistLearnMore = artwork.artistWikidata_url;
+            const artLearnMore = artwork.ojectWikidata_URL;
 
-            const artInfoDiv = document.getElementById('artInfo');
+            const mainDiv = document.getElementById('mainInfo');
+            const artIntroDiv = document.getElementById('artIntro');
+            const artDisplayDiv = document.getElementById('artDisplay');
+            const qLinksDiv = document.getElementById('qLinks');
+            const moreImgsDiv = document.getElementById('moreImgs');
+            
 
             //creating artwork title element
             const nameHeading = document.createElement('h1');
@@ -78,14 +87,25 @@
             //artist prefix and name
             const artistHeading = document.createElement('h2');
             artistHeading.innerText = artistPre + " " + artist + " " + artistSuf;
+
+            //create elements displaying the artist information
+            const artistNameInfo = document.createElement('h2');
+            artistNameInfo.innerText = artist;
+            const artistLifeDateInfo = document.createElement('h2');
+            artistLifeDateInfo.innerText = artistLifeDates;
+            const artistNationalityInfo = document.createElement('h2');
+            artistNationalityInfo.innerText = artistNationality;
             
             //clear out html in the div
-            artInfoDiv.innerHTML = "";
+            mainDiv.innerHTML = "";
+            artIntroDiv.innerHTML = "";
+            artDisplayDiv.innerHTML = "";
+            moreImgsDiv.innerHTML = "";
 
             // append the elements made
-            artInfoDiv.appendChild(nameHeading);
-            artInfoDiv.appendChild(artImgImg);
-            artInfoDiv.appendChild(artistHeading);
+            artIntroDiv.appendChild(nameHeading);
+            artDisplayDiv.appendChild(artImgImg);
+            artIntroDiv.appendChild(artistHeading);
 
         }
 

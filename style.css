@@ -29,20 +29,21 @@
     grid-auto-flow: row;
     grid-template-areas:
       "artIntro artIntro . . . ."
-      "artistInfo artWorkInfo artDisplay artDisplay artDisplay ."
-      "artistInfo artWorkInfo artDisplay artDisplay artDisplay ."
-      "artistInfo artWorkInfo artDisplay artDisplay artDisplay ."
-      "artistInfo artWorkInfo artDisplay artDisplay artDisplay ."
-      "artistInfo artWorkInfo artDisplay artDisplay artDisplay ."
-      ". . . . . .";
+      "artIntro artIntro artDisplay artDisplay artDisplay ."
+      "artIntro artIntro artDisplay artDisplay artDisplay ."
+      "artIntro artIntro artDisplay artDisplay artDisplay ."
+      "artIntro artIntro artDisplay artDisplay artDisplay ."
+      "qLinks qLinks artDisplay artDisplay artDisplay ."
+      ". . moreImgs moreImgs moreImgs .";
     grid-area: mainDiv;
   }
   
-  .artIntro { grid-area: artIntro; }
-  
   .artDisplay { grid-area: artDisplay; }
   
-  .artistInfo { grid-area: artistInfo; }
+  .artIntro { grid-area: artIntro; }
   
-  .artWorkInfo { grid-area: artWorkInfo; }
+  .qLinks { grid-area: qLinks; }
+  
+  .moreImgs { grid-area: moreImgs; }
+  
   
