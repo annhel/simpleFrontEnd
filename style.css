@@ -1,14 +1,12 @@
 .container {  display: grid;
     grid-template-columns: 0.5fr 1.5fr 1fr 1.7fr 0.3fr;
-    grid-template-rows: 0.6fr 1.4fr 0.5fr 0.9fr 0.8fr 0.8fr 0.7fr 2.3fr;
+    grid-template-rows: 0.4fr 1.6fr 0.5fr 0.9fr 0.8fr 0.8fr;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
       "logo header header header header"
-      "welcomeBanner welcomeBanner welcomeBanner welcomeBanner welcomeBanner"
-      "searchBar searchBar searchBar searchBar searchBar"
-      "mainDiv mainDiv mainDiv mainDiv mainDiv"
-      "mainDiv mainDiv mainDiv mainDiv mainDiv"
+      "empty1 empty1 welcomeBanner empty2 empty2"
+      ". . searchBar . ."
       "mainDiv mainDiv mainDiv mainDiv mainDiv"
       "mainDiv mainDiv mainDiv mainDiv mainDiv"
       "mainDiv mainDiv mainDiv mainDiv mainDiv";
@@ -18,25 +16,21 @@
   
   .header { grid-area: header; }
   
-  .searchBar { grid-area: searchBar; }
-  
-  .welcomeBanner { grid-area: welcomeBanner; }
-  
   .mainDiv {  display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
-      "artIntro artIntro . . . ."
-      "artIntro artIntro artDisplay artDisplay artDisplay ."
-      "artIntro artIntro artDisplay artDisplay artDisplay ."
-      "artIntro artIntro artDisplay artDisplay artDisplay ."
-      "artIntro artIntro artDisplay artDisplay artDisplay ."
-      "qLinks qLinks artDisplay artDisplay artDisplay ."
-      ". . moreImgs moreImgs moreImgs .";
+      ". artDisplay . artIntro artIntro ."
+      ". artDisplay . artIntro artIntro ."
+      ". artDisplay . artIntro artIntro ."
+      ". . . qLinks qLinks ."
+      ". . . . . ."
+      ". . . . . .";
     grid-area: mainDiv;
-  }
+    background-color: #DBD2C2;
+  } 
   
   .artDisplay { grid-area: artDisplay; }
   
@@ -44,6 +38,53 @@
   
   .qLinks { grid-area: qLinks; }
   
-  .moreImgs { grid-area: moreImgs; }
+  .welcomeBanner { grid-area: welcomeBanner; }
   
+  .empty1 { grid-area: empty1; }
   
+  .empty2 { grid-area: empty2; }
+  
+  .searchBar { grid-area: searchBar; padding: 1%;} 
+  
+  .navbar{
+    background-color: transparent;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding:15px;
+    min-height:30px; 
+    min-width: 120px;
+    font-size: 25px;
+  }
+
+  .navbar:hover {
+    background-color: #DBD2C2;
+    transition: 0.7s;
+}
+
+  .button {
+    background-color: #967171;
+    color: white;
+    border-color: #836363;
+    border-radius: 10px;
+    padding:15px;
+    min-height:30px; 
+    min-width: 120px;
+  }
+
+  .button:hover {
+    background-color:#634b4b;
+    transition: 0.7s;
+}
+
+.input{
+    padding: 15px;
+    background: white;
+    font: 15px sans-serif;
+    border-color: #967171;
+    border-radius: 10px;
+}
+
+h1, h2, h3, h4, button, input{
+    font-family: 'Italiana', serif;
+}

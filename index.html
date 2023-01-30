@@ -2,33 +2,49 @@
 <html lang="en">
 <head>
     <title>MET Art</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        img{image-rendering: pixelated;
+            image-rendering: -webkit-optimize-contrast;}
+    </style>
 </head>
 
-<body>
+<body style="background-color:#F8F1EC;">
     <div class="container">
         <div class="logo">
-            <img src="https://www.jamesrobertwatson.com/images16/themetlogo2.jpg" alt="MET Logo">
+            <a href="https://www.metmuseum.org/"><img src="https://i.pinimg.com/564x/df/bc/05/dfbc052670ad238ccfc6260bf0e587be.jpg" alt="MET Logo" height="211"></a>
         </div>
-        <div class="header">
-            <h4 style="display: inline-block; text-align: center;">An art archival resource using the The Metropolitan Museum of Art Collection API.</h4>
+        <div class="header" style="text-align: center;padding-top: 2.5%; background-color: #967171;" >
+            <h4 style="-webkit-text-fill-color: white; font-size: 140%;">An art archival resource using the The Metropolitan Museum of Art Collection API.</h4>
+            <a href="https://www.metmuseum.org/"><button class="navbar">The MET</button></a>
+            <a href="https://www.metmuseum.org/learn/learning-resources"><button class="navbar">Learning Resources</button></a>
+            <a href="https://www.metmuseum.org/art/libraries-and-research-centers"><button class="navbar">Research</button></a>
         </div>
+        <div class="empty1"></div>
         <section>
-            <div class="welcomeBanner">
-                <span>
-                    <img src="https://i.pinimg.com/564x/b1/09/c5/b109c5f4f9ad50ace467ccbbc76bd09b.jpg" alt="The MET">
-                </span>
-                
-                <h2>Welcome to The MET Archives.</h2>
-                <h3>Explore highlighted pieces from The MET, past & present.</h3>
+            <div class="welcomeBanner" style="text-align: center; background-color: #DBD2C2">
+                <figure>
+                    <img src="https://i.pinimg.com/736x/5c/4e/4c/5c4e4c6c89322dc705d9a364c0b961d2.jpg" alt="The MET"
+                    height="700"
+                    width="1300"
+                    style="padding-top: 10px;">
+                    <figcaption style="text-align: right; -webkit-text-fill-color: #848073;"> "<b>Undertow</b>" - Winslow Homer </figcaption>
+                </figure>
             </div>
         </section>
-        <div class="searchBar">
-            <input type = "text" placeholder="enter a number(0-3000)"  oninput="setArtId(event)">
-            <button onclick="getArt()">Enter</button>
+        <div class="empty2"></div>
+        <div class="searchBar" style="text-align: center;">
+            <h2 style="text-align: center; background-color: white; -webkit-text-fill-color: #967171; font-size: 340%;">Welcome to The MET Archives.</h2>
+            <h3 style="background-color: white; -webkit-text-fill-color: #967171; font-size: 110%; padding: 5px;">Explore over 5000 years of collected artwork and over two million works, from prehistory to the present and from every part of the globe. </h3>
+            <input class="input" type = "text" placeholder="Enter a number"  size="50" oninput="setArtId(event)">
+            <button class="button" onclick="getArt()">Load Archive</button>
         </div>
         <div class="mainDiv" id="mainDiv">
-          <div class="artIntro" id="artIntro"></div>
+          <div class="artIntro" id="artIntro" style="padding-right: 30%;"></div>
           <div class="qLinks"></div>
           <div class="artDisplay" id="artDisplay"></div>
             <div class="moreImgs"></div>
@@ -40,6 +56,7 @@
 <script>
     let artwork = {};
     let artId = "";
+    let allArtwork;
 
     function setArtId(){
         artId = event.target.value
@@ -47,7 +64,12 @@
 
     async function getArt(){
             const httpResponse = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects/" + artId);
-
+            
+            //error handling
+            if(httpResponse.status === 404){
+                alert(`No artwork with ID ${artId} found`);
+                    return;
+            }
 
             const body = await httpResponse.json();
             artwork = body;
@@ -68,14 +90,13 @@
             const artistNationality = artwork.artistNationality;
             const artistLifeDates = artwork.artistDisplayBio;
         
-            const artistLearnMore = artwork.artistWikidata_url;
+            const artistLearnMore = artwork.artistWikidata_URL;
             const artLearnMore = artwork.ojectWikidata_URL;
 
             const mainDiv = document.getElementById('mainInfo');
             const artIntroDiv = document.getElementById('artIntro');
             const artDisplayDiv = document.getElementById('artDisplay');
             const qLinksDiv = document.getElementById('qLinks');
-            const moreImgsDiv = document.getElementById('moreImgs');
             
 
             //creating artwork title element
@@ -84,6 +105,7 @@
             //creating artwork IMG
             const artImgImg = document.createElement('img');
             artImgImg.src = artImg;
+
             //artist prefix and name
             const artistHeading = document.createElement('h2');
             artistHeading.innerText = artistPre + " " + artist + " " + artistSuf;
@@ -91,21 +113,57 @@
             //create elements displaying the artist information
             const artistNameInfo = document.createElement('h2');
             artistNameInfo.innerText = artist;
-            const artistLifeDateInfo = document.createElement('h2');
-            artistLifeDateInfo.innerText = artistLifeDates;
-            const artistNationalityInfo = document.createElement('h2');
-            artistNationalityInfo.innerText = artistNationality;
+            const artistLifeDateNationalityInfo = document.createElement('h3');
+            artistLifeDateNationalityInfo.innerText = artistNationality + " | " + artistLifeDates;
+
+            const emptyh1 = document.createElement('h1');
+            emptyh1.innerText = " ";
+            const emptyh2 = document.createElement('h1');
+            emptyh2.innerText = " ";
+            const intro = document.createElement('h2');
+            intro.innerText = "Additional Details:";
+
+            const artMed = document.createElement('h3');
+            artMed.innerText = "Art Medium(s): " + artMedium;
+            const artCreation = document.createElement('h3');
+            artCreation.innerText = "Historical Period: " + creation;
+            const artCul = document.createElement('h3');
+            artCul.innerText = "Cultural Background: " + artCulture;
+
+            const artistQLink = document.createElement('a');
+            const text1 = document.createTextNode("Learn more about the artist.")
+            artistQLink.appendChild(text1);
+            artistQLink.title = "Learn more about the artist.";
+            artistQLink.href = artistLearnMore;
+
+            const emptyh3 = document.createElement('h1');
+            emptyh3.innerText = " ";
+
+            const artQLink = document.createElement('a');
+            const text2 = document.createTextNode("Learn more about the artwork.")
+            artQLink.appendChild(text2);
+            artQLink.title = "Learn more about the artwork.";
+            artQLink.href = artLearnMore;
+
             
             //clear out html in the div
-            mainDiv.innerHTML = "";
             artIntroDiv.innerHTML = "";
             artDisplayDiv.innerHTML = "";
-            moreImgsDiv.innerHTML = "";
 
             // append the elements made
             artIntroDiv.appendChild(nameHeading);
             artDisplayDiv.appendChild(artImgImg);
             artIntroDiv.appendChild(artistHeading);
+            artIntroDiv.appendChild(artistLifeDateNationalityInfo)
+            artIntroDiv.appendChild(emptyh1);
+            artIntroDiv.appendChild(emptyh2);
+            artIntroDiv.appendChild(intro);
+            artIntroDiv.appendChild(artMed);
+            artIntroDiv.appendChild(artCreation);
+            artIntroDiv.appendChild(artCul);
+            artIntroDiv.appendChild(artistQLink);
+            artIntroDiv.appendChild(emptyh3);
+            artIntroDiv.appendChild(artQLink);
 
         }
 
