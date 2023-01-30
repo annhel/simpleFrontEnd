@@ -26,19 +26,17 @@
         </div>
         <div class="empty1"></div>
         <section>
+            <h2 style="text-align: center; background-color: white; -webkit-text-fill-color: #967171; font-size: 340%;">Welcome to The MET Archives.</h2>
             <div class="welcomeBanner" style="text-align: center; background-color: #DBD2C2">
                 <figure>
-                    <img src="https://i.pinimg.com/736x/5c/4e/4c/5c4e4c6c89322dc705d9a364c0b961d2.jpg" alt="The MET"
+                    <img src="https://www.metmuseum.org/-/media/images/about-the-met/new-landing-page/atm_teaser_700x440.jpg?h=440&iar=0&mw=840&w=700&sc_lang=en&hash=DF6B5B298EDEF077C9971A7F2E37EB2B" alt="The Met"
                     height="700"
-                    width="1300"
-                    style="padding-top: 10px;">
-                    <figcaption style="text-align: right; -webkit-text-fill-color: #848073;"> "<b>Undertow</b>" - Winslow Homer </figcaption>
+                    width="1300">
                 </figure>
             </div>
         </section>
         <div class="empty2"></div>
         <div class="searchBar" style="text-align: center;">
-            <h2 style="text-align: center; background-color: white; -webkit-text-fill-color: #967171; font-size: 340%;">Welcome to The MET Archives.</h2>
             <h3 style="background-color: white; -webkit-text-fill-color: #967171; font-size: 110%; padding: 5px;">Explore over 5000 years of collected artwork and over two million works, from prehistory to the present and from every part of the globe. </h3>
             <input class="input" type = "text" placeholder="Enter a number"  size="50" oninput="setArtId(event)">
             <button class="button" onclick="getArt()">Load Archive</button>
@@ -105,6 +103,8 @@
             //creating artwork IMG
             const artImgImg = document.createElement('img');
             artImgImg.src = artImg;
+            artImgImg.alt = "Image Not Available";
+            artImgImg.align = "center";
 
             //artist prefix and name
             const artistHeading = document.createElement('h2');
